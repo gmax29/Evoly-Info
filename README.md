@@ -56,6 +56,7 @@ The source code of Evoly is **not public**. This repository contains only this d
 Evoly is not open source. You are welcome to read this page, talk about Evoly and link to it.
 Using, copying, cloning, changing or rebuilding Evoly – or using it in your own projects or for AI training –
 is only allowed with the prior written permission of Gmax17/Gmax29. The full terms are in [LICENSE](LICENSE).
+Text and data mining and AI training are expressly reserved (Section 44b(3) UrhG, Art. 4(3) Directive (EU) 2019/790) – also in machine-readable form in [tdmrep.json](tdmrep.json).
 
 ## Asking for permission
 
