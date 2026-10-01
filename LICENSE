@@ -1,47 +1,34 @@
-Evoly – Proprietäre Lizenz / Proprietary License
-Copyright (c) 2026 Gmax17 (GitHub: gmax29). Alle Rechte vorbehalten. All rights reserved.
+Evoly – Proprietary License
+Copyright (c) 2026 Gmax17 (GitHub: gmax29). All rights reserved.
 
-DEUTSCH (maßgeblich)
+1. This software ("Evoly"), including its source code, executables, user interface, prompts,
+   documentation, tests and all related files, is the copyrighted property of Gmax17.
+   NO LICENSE IS GRANTED, whether express or implied.
 
-1. Diese Software („Evoly“) einschließlich Quelltext, ausführbarer Dateien, Oberfläche, Prompts,
-   Dokumentation, Tests und aller zugehörigen Dateien ist urheberrechtlich geschütztes Eigentum
-   von Gmax17. Es wird KEINE Lizenz erteilt – weder ausdrücklich noch stillschweigend.
+2. Without the prior written permission of Gmax17 you may not, in whole or in part:
+   a) use, run or install Evoly;
+   b) copy, reproduce, download or clone Evoly;
+   c) modify, translate, adapt or edit Evoly, or create derivative works based on it;
+   d) reverse engineer, decompile or disassemble Evoly, except where expressly permitted by law;
+   e) distribute, publish, make publicly available, sell, rent, lend or sublicense Evoly;
+   f) use Evoly as the basis, template or part of any other project or product;
+   g) use Evoly to train, fine-tune, evaluate or improve AI models, or for text and data mining.
+      The rights holder expressly reserves these rights within the meaning of Art. 4(3) of
+      Directive (EU) 2019/790 and Section 44b(3) of the German Copyright Act (UrhG).
 
-2. Ohne vorherige schriftliche Zustimmung von Gmax17 ist es untersagt, Evoly ganz oder in Teilen
-   a) zu nutzen, auszuführen oder zu installieren,
-   b) zu kopieren, zu vervielfältigen, herunterzuladen oder zu klonen,
-   c) zu verändern, zu übersetzen, zu bearbeiten oder abgeleitete Werke daraus zu erstellen,
-   d) zurückzuentwickeln, zu dekompilieren oder zu disassemblieren, soweit dies gesetzlich
-      nicht ausdrücklich erlaubt ist,
-   e) zu verbreiten, zu veröffentlichen, öffentlich zugänglich zu machen, zu verkaufen,
-      zu vermieten, zu verleihen oder Unterlizenzen daran zu vergeben,
-   f) als Grundlage, Vorlage oder Bestandteil eines eigenen Projekts oder Produkts zu verwenden,
-   g) zum Training, Fine-Tuning, zur Bewertung oder Verbesserung von KI-Modellen zu verwenden
-      oder für Text- und Data-Mining auszuwerten. Der Rechteinhaber erklärt hiermit ausdrücklich
-      den Nutzungsvorbehalt nach § 44b Abs. 3 UrhG und Art. 4 Abs. 3 der Richtlinie (EU) 2019/790.
+3. Being able to view the source code (for example on GitHub) grants no rights whatsoever.
+   Anyone who wants to use Evoly or any part of it in any way must ask Gmax17 (GitHub: gmax29)
+   explicitly beforehand. Use is permitted only with his written consent in each individual case.
+   Silence does not constitute consent.
 
-3. Die bloße Möglichkeit, den Quelltext einzusehen (z. B. auf GitHub), gewährt keinerlei Rechte.
-   Wer Evoly oder Teile davon in irgendeiner Form verwenden möchte, muss Gmax17 (GitHub: gmax29)
-   vorher ausdrücklich fragen. Eine Nutzung ist nur mit seiner schriftlichen Zustimmung im
-   Einzelfall erlaubt; Schweigen gilt nicht als Zustimmung.
+4. Any infringement may be pursued under civil and criminal law, including claims for injunctive
+   relief, information and damages.
 
-4. Verstöße können zivil- und strafrechtlich verfolgt werden (u. a. Unterlassung, Auskunft,
-   Schadensersatz).
+5. Evoly is provided "as is", without any warranty. Liability is excluded to the extent permitted
+   by law.
 
-5. Evoly wird ohne jede Gewähr bereitgestellt. Eine Haftung ist ausgeschlossen, soweit gesetzlich
-   zulässig.
+6. Third-party components that Evoly uses or downloads (for example Microsoft.Web.WebView2,
+   llama.cpp, language and image models, text-to-speech engines) are governed exclusively by their
+   own licenses. This license applies only to Evoly's own parts.
 
-6. Komponenten Dritter (z. B. Microsoft.Web.WebView2, llama.cpp, Sprach- und Bildmodelle, TTS-Engines),
-   die Evoly verwendet oder herunterlädt, unterliegen ausschließlich ihren eigenen Lizenzen. Diese
-   Lizenz gilt nur für die eigenen Bestandteile von Evoly.
-
-ENGLISH (summary)
-
-No license is granted. Without prior written permission from Gmax17 you may not use, run, copy,
-download, clone, modify, translate, create derivative works of, reverse engineer, distribute,
-publish, sell, rent, sublicense, or use Evoly (in whole or in part) as the basis of any project or
-product, nor use it to train, fine-tune, evaluate or improve AI models or for text and data mining
-(reservation of rights under Art. 4(3) Directive (EU) 2019/790). Being able to view the source code
-grants no rights. Anyone who wants to use Evoly in any way must ask Gmax17 (GitHub: gmax29) first;
-use is only allowed with his written consent in each individual case. Silence is not consent. Provided "as is" without warranty. Third-party components remain under their own
-licenses.
+7. This license is governed by the laws of the Federal Republic of Germany.

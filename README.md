@@ -1,16 +1,16 @@
 # Evoly
 
-Evoly ist eine persönliche KI-Assistentin für Windows, entwickelt von **Gmax17**.
-Sie läuft vollständig lokal auf dem eigenen PC – ohne Cloud – und hilft beim Programmieren, Prüfen und Verbessern von Software.
+Evoly is a personal AI assistant for Windows, developed by **Gmax17**.
+It runs entirely locally on your own PC – no cloud – and helps with writing, testing and improving software.
 
-## Quellcode
+## Source code
 
-Der Quellcode von Evoly ist **nicht öffentlich**. Dieses Repository enthält ausschließlich diese Beschreibung und die Lizenz.
+The source code of Evoly is **not public**. This repository contains only this description and the license.
 
-## Lizenz
+## License
 
-© 2026 Gmax17. **Alle Rechte vorbehalten.**
-Evoly darf ohne vorherige ausdrückliche, schriftliche Zustimmung von Gmax17 weder verwendet, kopiert, geklont, verändert, bearbeitet,
-verbreitet noch als Grundlage eigener Projekte oder für KI-Training genutzt werden. Einzelheiten: [LICENSE](LICENSE).
+© 2026 Gmax17. **All rights reserved.**
+Evoly may not be used, copied, cloned, modified, edited, distributed, used as the basis of other projects or used for AI training
+without the prior, explicit, written permission of Gmax17. See [LICENSE](LICENSE) for details.
 
-Anfragen: über GitHub an **gmax29**.
+Inquiries: via GitHub to **gmax29**.
