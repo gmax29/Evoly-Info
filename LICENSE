@@ -29,8 +29,15 @@ description of Evoly and this License. It does not contain the Software.
 
 1. OWNERSHIP
 
-Evoly is the copyrighted work and property of the Owner. No license is granted, whether express or
-implied, except for what section 2 expressly allows.
+Evoly is the property of the Owner. To the extent Evoly or any of its parts are protected by
+copyright (Section 2 UrhG) or related rights, all such rights are held by the Owner.
+
+In addition, the non-public source code and the other internal materials of Evoly are trade secrets
+of the Owner within the meaning of Section 2 No. 1 of the German Trade Secrets Act (GeschGehG).
+They are kept confidential by appropriate measures – among others, they are stored only in a
+private repository to which only the Owner has access.
+
+No license is granted, whether express or implied, except for what section 2 expressly allows.
 
 This License does not claim rights in ideas, principles, methods or concepts as such, which the law
 leaves free (Section 69a(2) of the German Copyright Act, UrhG). It protects the concrete expression:
@@ -46,13 +53,17 @@ other protected material of Evoly.
   unaffected by this License, but they do not grant any license to the Software itself.
 - Talk, write or report about Evoly and link to the Information Repository.
 - Quote short passages of the Information Repository with a source reference.
-- Anything that the law always allows regardless of any license (for example statutory quotation
-  rights). This License does not take away rights that the law guarantees.
+- Anything that the law always allows regardless of any license – for example quotation
+  (Section 51 UrhG), text and data mining for scientific research (Section 60d UrhG), and the
+  rights of a lawful user of a computer program that cannot be excluded by contract
+  (Section 69d(2), (3), (5) and (7) and Section 69e in conjunction with Section 69g(2) UrhG).
+  This License does not take away rights that the law guarantees.
 
 
 3. WHAT YOU MAY NOT DO WITHOUT WRITTEN PERMISSION
 
-Unless the Owner has given you written permission first, you may not:
+Unless the Owner has given you permission first (see section 4), and except where the law
+expressly allows it (see section 2), you may not:
 
 a) use, install or run the Software;
 b) copy, download, clone, mirror or store the Software or any part of it;
@@ -66,11 +77,16 @@ f) use the Software's source code, copyrighted documentation, prompts, protected
    or other protected expression as the basis, template or part of another project, product or
    service – commercial or not;
 g) use the Software or the content of the Information Repository to train, fine-tune, test or
-   improve any AI model, or analyse it automatically (text and data mining). The Owner expressly
-   reserves these rights within the meaning of Section 44b(3) UrhG and Art. 4(3) of
-   Directive (EU) 2019/790. The reservation is also declared in machine-readable form in the file
-   "tdmrep.json" (TDM Reservation Protocol) in the Owner's repositories;
-h) remove or change copyright notices, license texts or the Owner's names.
+   improve any AI model, or analyse it automatically (text and data mining), except to the extent
+   such use cannot lawfully be restricted (for example under Section 60d UrhG). The Owner
+   expressly reserves these rights within the meaning of Section 44b(3) UrhG and Art. 4(3) of
+   Directive (EU) 2019/790. A machine-readable notice based on the TDM Reservation Protocol is
+   also provided in the file "tdmrep.json". The source code of Evoly is not lawfully accessible to
+   third parties, so the statutory permission for text and data mining (Section 44b(2) UrhG)
+   does not cover it;
+h) remove or change copyright notices, license texts or the Owner's names;
+i) obtain, use or disclose the non-public source code or any other trade secret of Evoly without
+   authorization (Section 4 GeschGehG).
 
 This applies to every person and every company, for private and commercial purposes alike.
 
@@ -81,7 +97,8 @@ Open an issue at github.com/gmax29/Evoly-Info/issues or contact gmax29 on GitHub
 Please say who you are, which part of Evoly you want to use, and for what purpose.
 
 A permission only counts if:
-- it is given in writing (an answer on GitHub or by e-mail is enough),
+- it is given in text form within the meaning of Section 126b of the German Civil Code (BGB) –
+  an answer on GitHub or by e-mail is enough,
 - it comes from the Owner, and
 - it names you and your purpose.
 
@@ -99,9 +116,11 @@ or pass it on. Please delete it and let the Owner know where it came from.
 
 6. IF THESE TERMS ARE BROKEN
 
-Any use beyond these terms infringes the Owner's rights. The Owner may take legal action, including
-claims to stop the use, to receive information about it, and for damages. If you violate these
-terms, any permission you were given ends automatically.
+Any unauthorized use that infringes the Owner's copyright, trade secrets or other applicable rights
+may result in legal action, including claims for injunctive relief, information and damages (for
+example under Sections 97 and 101 UrhG and Sections 6, 7, 8 and 10 GeschGehG) and, where applicable,
+criminal prosecution (for example under Section 106 UrhG or Section 23 GeschGehG). If you violate
+these terms, any permission you were given ends automatically.
 
 
 7. OTHER PEOPLE'S SOFTWARE
@@ -114,12 +133,13 @@ are governed only by their own licenses. This License covers only Evoly's own pa
 8. NO WARRANTY
 
 Evoly is provided "as is", without any promise that it works or fits a purpose. Liability is
-excluded as far as the law permits. Liability that cannot be excluded by law (for example for
-intent or gross negligence) remains unaffected.
+excluded as far as the law permits. Liability that cannot be excluded by law remains unaffected –
+in particular for intent and gross negligence, for injury to life, body or health, and under the
+German Product Liability Act (ProdHaftG).
 
 
 9. GENERAL
 
-This License is governed by the law of the Federal Republic of Germany. If any part of it is found
-to be invalid, the rest remains valid, and the invalid part is to be read as close to its purpose
-as the law allows.
+This License is governed by the law of the Federal Republic of Germany. If any provision of this
+License is or becomes invalid, the remaining provisions remain valid; in place of the invalid
+provision, the statutory rules apply.

@@ -3,7 +3,8 @@
 **Your own AI developer – living on your PC, not in someone else's cloud.**
 
 Evoly is a personal AI assistant for Windows, created by **Gmax17/Gmax29**.
-She runs entirely on your own computer: no cloud, no subscription, no data leaving your machine.
+She runs on your own computer: no cloud AI, no subscription. Your conversations and files stay on your PC –
+Evoly only goes online when a task needs it, for example for a web search or a download.
 You talk to her in short, everyday sentences – and she gets to work.
 
 ---
@@ -56,7 +57,7 @@ The source code of Evoly is **not public**. This repository contains only this d
 Evoly is not open source. You are welcome to read this page, talk about Evoly and link to it.
 Using, copying, cloning, changing or rebuilding Evoly – or using it in your own projects or for AI training –
 is only allowed with the prior written permission of Gmax17/Gmax29. The full terms are in [LICENSE](LICENSE).
-Text and data mining and AI training are expressly reserved (Section 44b(3) UrhG, Art. 4(3) Directive (EU) 2019/790) – also in machine-readable form in [tdmrep.json](tdmrep.json).
+Text and data mining and AI training are expressly reserved (Section 44b(3) UrhG, Art. 4(3) Directive (EU) 2019/790); a machine-readable notice is provided in [tdmrep.json](tdmrep.json).
 
 ## Asking for permission
 
