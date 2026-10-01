@@ -1,34 +1,101 @@
-Evoly – Proprietary License
+EVOLY – PROPRIETARY LICENSE
 Copyright (c) 2026 Gmax17/Gmax29. All rights reserved.
 
-1. This software ("Evoly"), including its source code, executables, user interface, prompts,
-   documentation, tests and all related files, is the copyrighted property of Gmax17/Gmax29.
-   NO LICENSE IS GRANTED, whether express or implied.
 
-2. Without the prior written permission of Gmax17/Gmax29 you may not, in whole or in part:
-   a) use, run or install Evoly;
-   b) copy, reproduce, download or clone Evoly;
-   c) modify, translate, adapt or edit Evoly, or create derivative works based on it;
-   d) reverse engineer, decompile or disassemble Evoly, except where expressly permitted by law;
-   e) distribute, publish, make publicly available, sell, rent, lend or sublicense Evoly;
-   f) use Evoly as the basis, template or part of any other project or product;
-   g) use Evoly to train, fine-tune, evaluate or improve AI models, or for text and data mining.
-      The rights holder expressly reserves these rights within the meaning of Art. 4(3) of
-      Directive (EU) 2019/790 and Section 44b(3) of the German Copyright Act (UrhG).
+IN SHORT (plain language)
 
-3. Being able to view the source code (for example on GitHub) grants no rights whatsoever.
-   Anyone who wants to use Evoly or any part of it in any way must ask Gmax17/Gmax29 (GitHub: gmax29)
-   explicitly beforehand. Use is permitted only with his written consent in each individual case.
-   Silence does not constitute consent.
+Evoly belongs to Gmax17/Gmax29. It is not open source and not free to use.
+You may read the public information page and talk about Evoly.
+You may NOT use, copy, clone, change, rebuild, share or sell Evoly, use it in your own projects,
+or feed it to an AI, unless Gmax17/Gmax29 has said "yes" to you in writing first.
+If you are not sure whether something is allowed: it is not. Just ask.
 
-4. Any infringement may be pursued under civil and criminal law, including claims for injunctive
-   relief, information and damages.
+This summary is for clarity. The full terms below apply.
 
-5. Evoly is provided "as is", without any warranty. Liability is excluded to the extent permitted
-   by law.
 
-6. Third-party components that Evoly uses or downloads (for example Microsoft.Web.WebView2,
-   llama.cpp, language and image models, text-to-speech engines) are governed exclusively by their
-   own licenses. This license applies only to Evoly's own parts.
+1. WHAT EVOLY IS
 
-7. This license is governed by the laws of the Federal Republic of Germany.
+"Evoly" means the software of that name and everything that belongs to it: source code,
+programs (executables), user interface and design, prompts, documentation, tests, data files,
+images, names and logos – in every version, in whole and in part.
+Evoly is the copyrighted work and property of Gmax17/Gmax29 ("the owner").
+
+
+2. WHAT YOU MAY DO WITHOUT ASKING
+
+- View the public information page (github.com/gmax29/Evoly-Info) and this license.
+- Talk, write or report about Evoly and link to the public information page.
+- Quote short passages of the public information page with a source reference.
+- Anything that the law always allows regardless of any license (for example legal quotation
+  rights). This license does not take away rights that the law guarantees.
+
+
+3. WHAT YOU MAY NOT DO WITHOUT WRITTEN PERMISSION
+
+Unless the owner has given you written permission first, you may not:
+
+a) use, install or run Evoly;
+b) copy, download, clone, mirror or store Evoly or any part of it;
+c) change, edit, translate or adapt Evoly, or build anything based on it ("derivative works");
+d) take Evoly apart: reverse engineer, decompile or disassemble it, except where the law
+   expressly allows this;
+e) share Evoly in any way: publish, upload, distribute, sell, rent, lend, give away or
+   sublicense it, or make it available to others online;
+f) use Evoly, its code, its ideas as written down in its files, or its prompts as the basis,
+   template or part of another project, product or service – commercial or not;
+g) use Evoly to train, fine-tune, test or improve any AI model, or analyse it automatically
+   (text and data mining). The owner expressly reserves these rights in the sense of
+   Art. 4(3) of Directive (EU) 2019/790 and Section 44b(3) of the German Copyright Act (UrhG);
+h) remove or change copyright notices, license texts or names of the owner.
+
+This applies to every person and every company, for private and commercial purposes alike.
+
+
+4. HOW TO ASK FOR PERMISSION
+
+Open an issue at github.com/gmax29/Evoly-Info/issues or contact gmax29 on GitHub.
+Please say who you are, which part of Evoly you want to use, and for what purpose.
+
+A permission only counts if:
+- it is given in writing (an answer on GitHub or by e-mail is enough),
+- it comes from the owner himself, and
+- it names you and your purpose.
+
+A permission applies only to the person, the purpose and the scope it names. It cannot be passed
+on to anyone else. Unless it says otherwise, the owner can withdraw it at any time for the future.
+No answer means no. Silence is never permission.
+
+
+5. IF YOU HAVE A COPY YOU SHOULD NOT HAVE
+
+The source code of Evoly is not public. If a copy of Evoly or of its code reaches you without the
+owner's permission (for example through a leak, a mistake or a third party), you may not use or
+pass it on. Please delete it and let the owner know where it came from.
+
+
+6. IF THESE TERMS ARE BROKEN
+
+Any use beyond these terms infringes the owner's copyright. The owner may take legal action,
+including claims to stop the use, to receive information about it, and for damages. If you
+violate these terms, any permission you were given ends automatically.
+
+
+7. OTHER PEOPLE'S SOFTWARE
+
+Evoly uses or downloads components made by others (for example Microsoft WebView2, llama.cpp,
+language and image models, text-to-speech engines). Those components are not owned by
+Gmax17/Gmax29 and are governed only by their own licenses. This license covers only Evoly's own parts.
+
+
+8. NO WARRANTY
+
+Evoly is provided "as is", without any promise that it works or fits a purpose. Liability is
+excluded as far as the law permits. Liability that cannot be excluded by law (for example for
+intent or gross negligence) remains unaffected.
+
+
+9. GENERAL
+
+This license is governed by the law of the Federal Republic of Germany. If any part of it is found
+to be invalid, the rest remains valid, and the invalid part is to be read as close to its purpose
+as the law allows.
