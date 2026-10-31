@@ -44,11 +44,19 @@ suite of more than 800 checks – and even then it is only a proposal until her 
 
 Evoly is in active development (version 20.7) and is **not available for download**.
 
+## A look at the code
+
+Evoly's core is written in Rust – 17 crates with about 178,000 lines – together with a desktop app (Electron, React, TypeScript)
+and an Android app (Kotlin). Below is a short excerpt from her coding agent (`evoly-agent/src/coding_agent.rs`, lines 2356–2427,
+comments removed), shown as an image. The source code itself stays private.
+
+![Excerpt from Evoly's Rust coding agent](images/evoly-rust-agent.png)
+
 ---
 
 ## Source code
 
-The source code of Evoly is **not public**. This repository contains only this description and the license.
+The source code of Evoly is **not public**. This repository contains only this description, the license and one short code excerpt shown as an image.
 
 ## License
 
@@ -57,6 +65,8 @@ The source code of Evoly is **not public**. This repository contains only this d
 Evoly is not open source. You are welcome to read this page, talk about Evoly and link to it.
 Using, copying, cloning, changing or rebuilding Evoly – or using it in your own projects or for AI training –
 is only allowed with the prior written permission of Gmax17/Gmax29. The full terms are in [LICENSE](LICENSE).
+The code excerpt image is part of Evoly's protected source code: you may view it and link to it, but you may not copy, retype
+or extract it (including by text recognition) or use it in other software.
 Text and data mining and AI training are expressly reserved (Section 44b(3) UrhG, Art. 4(3) Directive (EU) 2019/790); a machine-readable notice is provided in [tdmrep.json](tdmrep.json).
 
 ## Asking for permission

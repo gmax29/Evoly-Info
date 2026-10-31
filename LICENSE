@@ -23,8 +23,15 @@ programs (executables), user interface and design, prompts, documentation, tests
 images, names and logos – in every version, in whole and in part, to the extent protected by
 copyright or other rights.
 
-"Information Repository": the public repository github.com/gmax29/Evoly-Info. It contains only a
-description of Evoly and this License. It does not contain the Software.
+"Information Repository": the public repository github.com/gmax29/Evoly-Info. It contains a
+description of Evoly, this License and the Code Excerpt. Apart from the Code Excerpt it does not
+contain the Software.
+
+"Code Excerpt": the image file images/evoly-rust-agent.png in the Information Repository. It shows
+lines 2356–2427 of the file evoly-agent/src/coding_agent.rs of Evoly (comments removed) and is part
+of the Software. It is shown for viewing only. Showing it does not make the source code of Evoly
+public and does not grant any license. Only the lines shown are disclosed; the rest of the source
+code remains confidential and a trade secret of the Owner (see section 1).
 
 
 1. OWNERSHIP
@@ -47,7 +54,7 @@ other protected material of Evoly.
 
 2. WHAT YOU MAY DO WITHOUT ASKING
 
-- View the Information Repository and this License.
+- View the Information Repository, including the Code Excerpt, and this License.
 - Use the functions that GitHub's Terms of Service require for public repositories (for example
   viewing and forking within GitHub) – for the Information Repository only. These rights remain
   unaffected by this License, but they do not grant any license to the Software itself.
@@ -86,7 +93,10 @@ g) use the Software or the content of the Information Repository to train, fine-
    does not cover it;
 h) remove or change copyright notices, license texts or the Owner's names;
 i) obtain, use or disclose the non-public source code or any other trade secret of Evoly without
-   authorization (Section 4 GeschGehG).
+   authorization (Section 4 GeschGehG);
+j) copy, retype, transcribe or extract the Code Excerpt – by hand, by text recognition (OCR) or by
+   any other means – reproduce it as text or code, or use it or any part of it in other software.
+   Viewing it and linking to it are allowed.
 
 This applies to every person and every company, for private and commercial purposes alike.
 
