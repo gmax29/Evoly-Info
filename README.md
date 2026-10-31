@@ -44,6 +44,24 @@ suite of more than 800 checks – and even then it is only a proposal until her 
 
 Evoly is in active development (version 20.7) and is **not available for download**.
 
+## See Evoly at work
+
+Real, unretouched recordings of Evoly on the developer's own PC – no cloud service involved. The app speaks German.
+
+**A live answer, in real time.** A coding question in Evoly's chat, answered by the local model in about four seconds.
+The Rust code from this recording was compiled afterwards exactly as Evoly wrote it, and its test passed.
+
+![Evoly answering a coding question live](images/evoly-demo.gif)
+
+**Evoly introduces herself** and writes a small Rust function with a test (this code, too, compiles and passes its test):
+
+![Evoly's answer in the desktop app](images/evoly-desktop-answer.png)
+
+**Evoly calls you.** Through her Android app Evoly can ring your phone; when you pick up, you talk to her by voice and she answers
+with her own voice. You can also call her yourself. (Image cropped to the notification.)
+
+![Incoming call from Evoly on Android](images/evoly-phone-call.png)
+
 ## A look at the code
 
 Evoly's core is written in Rust – 17 crates with about 178,000 lines – together with a desktop app (Electron, React, TypeScript)
@@ -56,7 +74,7 @@ comments removed), shown as an image. The source code itself stays private.
 
 ## Source code
 
-The source code of Evoly is **not public**. This repository contains only this description, the license and one short code excerpt shown as an image.
+The source code of Evoly is **not public**. This repository contains only this description, the license and a few images: screenshots, a screen recording and one short code excerpt.
 
 ## License
 
@@ -65,8 +83,9 @@ The source code of Evoly is **not public**. This repository contains only this d
 Evoly is not open source. You are welcome to read this page, talk about Evoly and link to it.
 Using, copying, cloning, changing or rebuilding Evoly – or using it in your own projects or for AI training –
 is only allowed with the prior written permission of Gmax17/Gmax29. The full terms are in [LICENSE](LICENSE).
-The code excerpt image is part of Evoly's protected source code: you may view it and link to it, but you may not copy, retype
-or extract it (including by text recognition) or use it in other software.
+The screenshots, the screen recording and the code excerpt in the folder images/ are part of Evoly's protected material: you may view them
+and link to them, but you may not copy, retype or extract them (including by text recognition), republish them or use them in other
+software, products or publications.
 Text and data mining and AI training are expressly reserved (Section 44b(3) UrhG, Art. 4(3) Directive (EU) 2019/790); a machine-readable notice is provided in [tdmrep.json](tdmrep.json).
 
 ## Asking for permission

@@ -24,8 +24,13 @@ images, names and logos – in every version, in whole and in part, to the exten
 copyright or other rights.
 
 "Information Repository": the public repository github.com/gmax29/Evoly-Info. It contains a
-description of Evoly, this License and the Code Excerpt. Apart from the Code Excerpt it does not
-contain the Software.
+description of Evoly, this License and the Showcase Material. Apart from the Showcase Material it
+does not contain the Software.
+
+"Showcase Material": the screenshots, the screen recording and the Code Excerpt in the folder images/
+of the Information Repository. They show parts of the Software – its user interface, its output and
+an excerpt of its source code – for viewing only. Showing them does not make the Software or its
+source code public and does not grant any license.
 
 "Code Excerpt": the image file images/evoly-rust-agent.png in the Information Repository. It shows
 lines 2356–2427 of the file evoly-agent/src/coding_agent.rs of Evoly (comments removed) and is part
@@ -54,7 +59,7 @@ other protected material of Evoly.
 
 2. WHAT YOU MAY DO WITHOUT ASKING
 
-- View the Information Repository, including the Code Excerpt, and this License.
+- View the Information Repository, including the Showcase Material, and this License.
 - Use the functions that GitHub's Terms of Service require for public repositories (for example
   viewing and forking within GitHub) – for the Information Repository only. These rights remain
   unaffected by this License, but they do not grant any license to the Software itself.
@@ -94,9 +99,10 @@ g) use the Software or the content of the Information Repository to train, fine-
 h) remove or change copyright notices, license texts or the Owner's names;
 i) obtain, use or disclose the non-public source code or any other trade secret of Evoly without
    authorization (Section 4 GeschGehG);
-j) copy, retype, transcribe or extract the Code Excerpt – by hand, by text recognition (OCR) or by
-   any other means – reproduce it as text or code, or use it or any part of it in other software.
-   Viewing it and linking to it are allowed.
+j) copy, retype, transcribe or extract the Showcase Material (including the Code Excerpt) or any part
+   of it – by hand, by text recognition (OCR) or by any other means –, reproduce it as text or code,
+   edit or republish it, or use it in other software, products or publications. Viewing it, linking
+   to it and the uses the law always allows (section 2) remain permitted.
 
 This applies to every person and every company, for private and commercial purposes alike.
 
