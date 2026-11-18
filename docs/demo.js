@@ -263,6 +263,49 @@ function zeitPruefen() {
   }
   if (!$("chat").hidden) zeitAnzeigen();
 }
+async function motorStarten(fortschritt) {
+  bibliothek ??= await import("./assets/demo/web-llm.js");
+  const vorlage = bibliothek.prebuiltAppConfig.model_list.find((eintrag) => eintrag.model_id === modell);
+  const appConfig = { ...bibliothek.prebuiltAppConfig, model_list: [{ ...vorlage, model: QUELLEN[modell].model, model_lib: QUELLEN[modell].lib }] };
+  const neu = await bibliothek.CreateMLCEngine(modell, { appConfig, initProgressCallback: fortschritt });
+  $("ladetext").textContent = t("js.fastfertig", "{p} % – fast fertig", { p: 100 });
+  try {
+    const aufwaermen = await neu.chat.completions.create({
+      messages: [{ role: "system", content: anweisung() }, ...SPRACHE === "de" ? BEISPIELE : [], { role: "user", content: "Hallo" }],
+      stream: true,
+      temperature: 0.7,
+      top_p: 0.9,
+      max_tokens: 24,
+      extra_body: { enable_thinking: false }
+    });
+    for await (const _ of aufwaermen) ;
+    await neu.resetChat();
+  } catch (fehler) {
+    try {
+      await neu.unload();
+    } catch {
+    }
+    throw fehler;
+  }
+  return neu;
+}
+async function neuStarten() {
+  const alt = engine;
+  engine = null;
+  try {
+    await alt?.unload();
+  } catch {
+  }
+  const neu = await motorStarten();
+  if (gesperrt) {
+    try {
+      await neu.unload();
+    } catch {
+    }
+    return;
+  }
+  engine = neu;
+}
 async function starten() {
   if (laeuft || !$("laden").hidden) return;
   if (istAbgelaufen()) {
@@ -279,17 +322,11 @@ async function starten() {
     $("spruch").textContent = t(`js.lade${spruch + 1}`, SPRUECHE[spruch]);
   }, 3500);
   try {
-    bibliothek ??= await import("./assets/demo/web-llm.js");
-    const vorlage = bibliothek.prebuiltAppConfig.model_list.find((eintrag) => eintrag.model_id === modell);
-    const appConfig = { ...bibliothek.prebuiltAppConfig, model_list: [{ ...vorlage, model: QUELLEN[modell].model, model_lib: QUELLEN[modell].lib }] };
-    engine = await bibliothek.CreateMLCEngine(modell, {
-      appConfig,
-      initProgressCallback: (stand) => {
-        const prozent = Math.round((stand.progress ?? 0) * 100);
-        $("balken").setAttribute("aria-valuenow", String(prozent));
-        $("balken").firstElementChild.style.width = `${prozent}%`;
-        $("ladetext").textContent = /cache/i.test(stand.text ?? "") && prozent > 0 ? t("js.fastfertig", "{p} % – fast fertig", { p: prozent }) : `${prozent} %`;
-      }
+    engine = await motorStarten((stand) => {
+      const prozent = Math.round((stand.progress ?? 0) * 100);
+      $("balken").setAttribute("aria-valuenow", String(prozent));
+      $("balken").firstElementChild.style.width = `${prozent}%`;
+      $("ladetext").textContent = /cache/i.test(stand.text ?? "") && prozent > 0 ? t("js.fastfertig", "{p} % – fast fertig", { p: prozent }) : `${prozent} %`;
     });
     if (gesperrt) return;
     if (!ersterStart() && !istFrei()) {
@@ -316,6 +353,33 @@ function sendenKnopf(stopp) {
   knopf.title = stopp ? t("js.knopf.stopp", "Stopp") : t("js.knopf.sendenEnter", "Senden (Enter)");
   knopf.innerHTML = stopp ? '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>' : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>';
 }
+async function antwortSchreiben(ziel, nummer) {
+  const strom = await engine.chat.completions.create({
+    messages: [
+      { role: "system", content: anweisung() },
+      ...SPRACHE === "de" ? BEISPIELE : [],
+      ...verlauf.slice(-8)
+    ],
+    stream: true,
+    temperature: 0.7,
+    top_p: 0.9,
+    max_tokens: 512,
+    extra_body: { enable_thinking: false }
+  });
+  let roh = "";
+  for await (const stueck of strom) {
+    if (nummer !== gespraech) break;
+    roh += stueck.choices[0]?.delta?.content ?? "";
+    const sichtbar = ohneDenken(roh);
+    if (sichtbar) ziel.innerHTML = darstellen(sichtbar);
+    $("verlauf").scrollTop = $("verlauf").scrollHeight;
+  }
+  if (nummer !== gespraech) return;
+  const antwort = ohneDenken(roh).trim() || t("js.antwort.leer", "Hm, da fällt mir gerade nichts ein. Frag mich noch mal anders?");
+  ziel.innerHTML = darstellen(antwort);
+  verlauf.push({ role: "assistant", content: antwort });
+  vorlesen(antwort);
+}
 async function senden(text) {
   const nachricht = text.trim();
   if (!nachricht || laeuft || !engine) return;
@@ -341,36 +405,23 @@ async function senden(text) {
     sendenKnopf(false);
     return;
   }
-  let roh = "";
   try {
-    const strom = await engine.chat.completions.create({
-      messages: [
-        { role: "system", content: anweisung() },
-        ...SPRACHE === "de" ? BEISPIELE : [],
-        ...verlauf.slice(-8)
-      ],
-      stream: true,
-      temperature: 0.7,
-      top_p: 0.9,
-      max_tokens: 512,
-      extra_body: { enable_thinking: false }
-    });
-    for await (const stueck of strom) {
-      if (nummer !== gespraech) break;
-      roh += stueck.choices[0]?.delta?.content ?? "";
-      const sichtbar = ohneDenken(roh);
-      if (sichtbar) ziel.innerHTML = darstellen(sichtbar);
-      $("verlauf").scrollTop = $("verlauf").scrollHeight;
+    try {
+      await antwortSchreiben(ziel, nummer);
+    } catch (fehler) {
+      if (gesperrt || nummer !== gespraech) return;
+      console.warn("Evoly Mini:", fehler);
+      if (/context|token/i.test(String(fehler?.message ?? fehler))) throw fehler;
+      ziel.innerHTML = '<span class="mini-tippt"><i></i><i></i><i></i></span>';
+      await neuStarten();
+      if (gesperrt || nummer !== gespraech || !engine) return;
+      await antwortSchreiben(ziel, nummer);
     }
-    if (nummer !== gespraech) return;
-    const antwort = ohneDenken(roh).trim() || t("js.antwort.leer", "Hm, da fällt mir gerade nichts ein. Frag mich noch mal anders?");
-    ziel.innerHTML = darstellen(antwort);
-    verlauf.push({ role: "assistant", content: antwort });
-    vorlesen(antwort);
   } catch (fehler) {
-    if (gesperrt) return;
+    if (gesperrt || nummer !== gespraech) return;
+    console.warn("Evoly Mini:", fehler);
     const text2 = String(fehler?.message ?? fehler);
-    ziel.innerHTML = darstellen(/context|token/i.test(text2) ? t("js.antwort.kopf", "Mir ist der Kopf voll – ich fange ein neues Gespräch an. Frag einfach noch mal!") : t("js.antwort.fehler", "Ups, da ist etwas schiefgegangen. Versuch es noch einmal."));
+    ziel.innerHTML = darstellen(/context|token/i.test(text2) ? t("js.antwort.kopf", "Mir ist der Kopf voll – ich fange ein neues Gespräch an. Frag einfach noch mal!") : /memory|OOM|out of|lost/i.test(text2) ? t("js.hinweis.speicher", "Für mich reicht der Grafikspeicher auf diesem Gerät leider nicht. Probier es an einem PC mit eigener Grafikkarte.") : t("js.antwort.fehler", "Ups, da ist etwas schiefgegangen. Versuch es noch einmal."));
     verlauf = [];
     try {
       await engine?.resetChat();
