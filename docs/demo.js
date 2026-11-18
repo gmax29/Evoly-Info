@@ -270,16 +270,7 @@ async function motorStarten(fortschritt) {
   const neu = await bibliothek.CreateMLCEngine(modell, { appConfig, initProgressCallback: fortschritt });
   $("ladetext").textContent = t("js.fastfertig", "{p} % – fast fertig", { p: 100 });
   try {
-    const aufwaermen = await neu.chat.completions.create({
-      messages: [{ role: "system", content: anweisung() }, ...SPRACHE === "de" ? BEISPIELE : [], { role: "user", content: "Hallo" }],
-      stream: true,
-      temperature: 0.7,
-      top_p: 0.9,
-      max_tokens: 24,
-      extra_body: { enable_thinking: false }
-    });
-    for await (const _ of aufwaermen) ;
-    await neu.resetChat();
+    await programmeVorbauen(neu);
   } catch (fehler) {
     try {
       await neu.unload();
@@ -288,6 +279,54 @@ async function motorStarten(fortschritt) {
     throw fehler;
   }
   return neu;
+}
+const ERSATZ = /* @__PURE__ */ new WeakMap();
+let ersatzAktiv = false;
+function ersatzEinschalten() {
+  if (ersatzAktiv) return;
+  ersatzAktiv = true;
+  const setzen = GPUComputePassEncoder.prototype.setPipeline;
+  GPUComputePassEncoder.prototype.setPipeline = function(programm) {
+    return setzen.call(this, ERSATZ.get(programm) ?? programm);
+  };
+}
+async function programmeVorbauen(neu) {
+  ersatzEinschalten();
+  const geraet = GPUDevice.prototype;
+  const sofortBauen = geraet.createComputePipeline;
+  const leer = /* @__PURE__ */ new WeakMap();
+  const imBau = [];
+  geraet.createComputePipeline = function(beschreibung) {
+    if (!(beschreibung?.layout instanceof GPUPipelineLayout)) return sofortBauen.call(this, beschreibung);
+    let modul = leer.get(this);
+    if (!modul) {
+      modul = this.createShaderModule({ code: "@compute @workgroup_size(1) fn main() {}" });
+      leer.set(this, modul);
+    }
+    const platzhalter = sofortBauen.call(this, { layout: beschreibung.layout, compute: { module: modul, entryPoint: "main" } });
+    imBau.push(
+      this.createComputePipelineAsync(beschreibung).catch(() => sofortBauen.call(this, beschreibung)).then((echt) => ERSATZ.set(platzhalter, echt))
+    );
+    return platzhalter;
+  };
+  try {
+    const trocken = await neu.chat.completions.create({
+      /* Lang (über 1000 Wörter), weil ab dieser Gesprächslänge noch einmal 4 Programme dazukommen – mit Platzhaltern kostet das nichts */
+      messages: [{ role: "system", content: anweisung() }, { role: "user", content: "Hallo! ".repeat(450) }],
+      stream: true,
+      temperature: 0.7,
+      top_p: 0.9,
+      max_tokens: 24,
+      ignore_eos: true,
+      extra_body: { enable_thinking: false }
+    });
+    for await (const _ of trocken) ;
+  } catch {
+  } finally {
+    geraet.createComputePipeline = sofortBauen;
+  }
+  await Promise.all(imBau);
+  await neu.resetChat();
 }
 async function neuStarten() {
   const alt = engine;
