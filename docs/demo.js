@@ -14,6 +14,10 @@ const FESTE_ANTWORTEN = [
     text: "Meine gro\xDFe Schwester Evoly kann richtig viel: Sie baut und pr\xFCft Programme, malt Bilder und kurze Videos, quatscht auf Deutsch mit eigener Stimme, l\xE4sst sich vom Handy aus anrufen und lernt aus ihren \xDCbungen dazu. Und alles l\xE4uft bei Gmax17 zu Hause auf dem PC \u2013 ohne Cloud."
   },
   {
+    muster: /^\W*(hallo|hi|hey|moin|servus)?\W*(was\s+kannst\s+du(\s+(alles|so|denn))?|was\s+machst\s+du|wer\s+bist\s+du|was\s+bist\s+du)\s*[?!.]*\s*$/i,
+    text: "Ich bin Evoly Mini, die kleine Schwester von Evoly, und laufe direkt in deinem Browser. Ich quatsche mit dir, erz\xE4hle Witze, schreibe kleine Gedichte und helfe bei einfachen Fragen. Dateien \xF6ffnen, ins Internet gehen oder Bilder malen kann ich nicht \u2013 das kann nur meine gro\xDFe Schwester."
+  },
+  {
     muster: /wer\s+hat\s+(dich|euch|evoly)\s+(gebaut|gemacht|programmiert|erschaffen|entwickelt)|wer\s+(ist|steckt)\s+hinter\s+(dir|euch|evoly)/i,
     text: "Mich und meine gro\xDFe Schwester Evoly hat Gmax17 gebaut \u2013 ein Mensch, kein Konzern. Ich bin die kleine Demo, die du direkt im Browser ausprobieren kannst."
   }
@@ -93,7 +97,10 @@ async function zugangPruefen(token) {
   }
 }
 function datumText(sekunden) {
-  return new Date(sekunden * 1e3).toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" });
+  const zeitpunkt = new Date(sekunden * 1e3);
+  const tag = zeitpunkt.toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" });
+  const uhr = zeitpunkt.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+  return `${tag}, ${uhr} Uhr`;
 }
 async function zugangLaden() {
   const adresse = new URLSearchParams(location.search);
@@ -108,10 +115,10 @@ async function zugangLaden() {
       } catch {
       }
       zugangBis = bis;
-      hinweis(`Danke! Dieses Ger\xE4t ist freigeschaltet bis ${datumText(bis)}.`);
+      hinweis(`Sch\xF6n, dass du da bist! Dein Freischalt-Link gilt bis ${datumText(bis)}.`);
     } else {
       linkUngueltig = true;
-      hinweis("Dieser Freischalt-Link ist ung\xFCltig oder abgelaufen.");
+      hinweis("Hm, dieser Freischalt-Link passt nicht \u2013 vielleicht ist er abgelaufen oder nicht ganz mitkopiert.");
     }
     return;
   }
@@ -237,7 +244,7 @@ async function sperren() {
   zeige("gesperrt");
   await modelleLoeschen();
   if (linkUngueltig) {
-    document.querySelector("#gesperrt .mini-sub").textContent = "Dieser Freischalt-Link ist ung\xFCltig oder abgelaufen. Pr\xFCf, ob er vollst\xE4ndig kopiert ist \u2013 oder melde dich kurz bei Gmax17.";
+    document.querySelector("#gesperrt .mini-sub").textContent = "Hm, dieser Freischalt-Link passt nicht \u2013 vielleicht ist er abgelaufen oder nicht ganz mitkopiert. Schreib Gmax17 einfach kurz, dann kl\xE4ren wir das.";
     return;
   }
   location.replace(SPENDEN_SEITE);
