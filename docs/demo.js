@@ -1,54 +1,83 @@
 const MODELL = { f16: "Qwen3.5-2B-q4f16_1-MLC", f32: "Qwen3.5-2B-q4f32_1-MLC" };
 const ALLE_MODELLE = [MODELL.f16, MODELL.f32];
+const QUELLEN = {
+  [MODELL.f16]: {
+    model: "https://huggingface.co/mlc-ai/Qwen3.5-2B-q4f16_1-MLC/resolve/dd74e9c8a20c4546df85c844103bff87b6dcacad/",
+    lib: "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/146ed9cd4b4062e967b017fd2291f7106b50599f/web-llm-models/v0_2_87/base/Qwen3.5-2B-q4f16_1_cs1k-webgpu.wasm"
+  },
+  [MODELL.f32]: {
+    model: "https://huggingface.co/mlc-ai/Qwen3.5-2B-q4f32_1-MLC/resolve/d835e5c41aa56174d915e8a3940cde599d3f5a30/",
+    lib: "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/146ed9cd4b4062e967b017fd2291f7106b50599f/web-llm-models/v0_2_87/base/Qwen3.5-2B-q4f32_1_cs1k-webgpu.wasm"
+  }
+};
+const SPRACHNAMEN = {
+  en: "Englisch",
+  fr: "Französisch",
+  es: "Spanisch",
+  it: "Italienisch",
+  pt: "brasilianischem Portugiesisch",
+  nl: "Niederländisch",
+  pl: "Polnisch",
+  tr: "Türkisch",
+  ru: "Russisch",
+  uk: "Ukrainisch",
+  zh: "vereinfachtem Chinesisch",
+  ja: "Japanisch"
+};
 const FESTE_ANTWORTEN = [
   {
     muster: /\b(wer|was)\s+(ist|sind)\s+gmax|\büber\s+gmax|\bgmax\s?17\s*\?/i,
-    text: "Gmax17 ist der Mensch, der meine gro\xDFe Schwester Evoly baut \u2013 ganz allein, seit September 2026, ohne Firma und ohne Werbung. Mehr wei\xDF ich \xFCber Gmax17 nicht, und ich erfinde auch nichts dazu."
+    text: "Gmax17 ist der Mensch, der meine große Schwester Evoly baut – ganz allein, seit September 2026, ohne Firma und ohne Werbung. Mehr weiß ich über Gmax17 nicht, und ich erfinde auch nichts dazu."
   },
   {
     muster: /(evoly|dich|euch).{0,40}(herunterlad|runterlad|download|installier|kaufen)|(herunterlad|runterlad|download|installier|kaufen).{0,40}(evoly|dich|euch)/i,
-    text: "Die gro\xDFe Evoly kann man noch nicht herunterladen \u2013 sie wohnt bisher nur auf dem PC von Gmax17. Mich hast du daf\xFCr schon: Ich laufe gerade direkt in deinem Browser."
+    text: "Die große Evoly kann man noch nicht herunterladen – sie wohnt bisher nur auf dem PC von Gmax17. Mich hast du dafür schon: Ich laufe gerade direkt in deinem Browser."
   },
   {
     muster: /was\s+(kann|macht)\s+(die\s+)?(große|grosse)\s+evoly|was\s+kann\s+evoly/i,
-    text: "Meine gro\xDFe Schwester Evoly kann richtig viel: Sie baut und pr\xFCft Programme, malt Bilder und kurze Videos, quatscht auf Deutsch mit eigener Stimme, l\xE4sst sich vom Handy aus anrufen und lernt aus ihren \xDCbungen dazu. Und alles l\xE4uft bei Gmax17 zu Hause auf dem PC \u2013 ohne Cloud."
+    text: "Meine große Schwester Evoly kann richtig viel: Sie baut und prüft Programme, malt Bilder und kurze Videos, quatscht auf Deutsch mit eigener Stimme, lässt sich vom Handy aus anrufen und lernt aus ihren Übungen dazu. Und alles läuft bei Gmax17 zu Hause auf dem PC – ohne Cloud."
   },
   {
     muster: /^\W*(hallo|hi|hey|moin|servus)?\W*(was\s+kannst\s+du(\s+(alles|so|denn))?|was\s+machst\s+du|wer\s+bist\s+du|was\s+bist\s+du)\s*[?!.]*\s*$/i,
-    text: "Ich bin Evoly Mini, die kleine Schwester von Evoly, und laufe direkt in deinem Browser. Ich quatsche mit dir, erz\xE4hle Witze, schreibe kleine Gedichte und helfe bei einfachen Fragen. Dateien \xF6ffnen, ins Internet gehen oder Bilder malen kann ich nicht \u2013 das kann nur meine gro\xDFe Schwester."
+    text: "Ich bin Evoly Mini, die kleine Schwester von Evoly, und laufe direkt in deinem Browser. Ich quatsche mit dir, erzähle Witze, schreibe kleine Gedichte und helfe bei einfachen Fragen. Dateien öffnen, ins Internet gehen oder Bilder malen kann ich nicht – das kann nur meine große Schwester."
   },
   {
     muster: /wer\s+hat\s+(dich|euch|evoly)\s+(gebaut|gemacht|programmiert|erschaffen|entwickelt)|wer\s+(ist|steckt)\s+hinter\s+(dir|euch|evoly)/i,
-    text: "Mich und meine gro\xDFe Schwester Evoly hat Gmax17 gebaut \u2013 ein Mensch, kein Konzern. Ich bin die kleine Demo, die du direkt im Browser ausprobieren kannst."
+    text: "Mich und meine große Schwester Evoly hat Gmax17 gebaut – ein Mensch, kein Konzern. Ich bin die kleine Demo, die du direkt im Browser ausprobieren kannst."
   }
 ];
 function festeAntwort(nachricht) {
   return FESTE_ANTWORTEN.find((eintrag) => eintrag.muster.test(nachricht))?.text ?? null;
 }
 const DEMO_DAUER = 24 * 60 * 60 * 1e3;
-const SCHLUESSEL_PRUEFSUMME = "ae5ba3c3b0f32d127d6409748e5f84a1acd596cf7b620664b888128ab57ae7ff";
-const MERKER = { start: "evolyMini.erststart", gesperrt: "evolyMini.gesperrt", frei: "evolyMini.frei", zugang: "evolyMini.zugang" };
+const MERKER = { start: "evolyMini.erststart", gesperrt: "evolyMini.gesperrt", zugang: "evolyMini.zugang" };
 const PRUEFSCHLUESSEL = "JUWnU9bL0o60KrtGWX9Hs3ScN0liNuGjN_dRj91vRYQ";
-const SPENDEN_SEITE = "https://streamelements.com/gmax_tv/tip";
 const ANWEISUNG = `Du bist Evoly Mini, eine kleine, freundliche KI mit Humor. Du schreibst locker und kurz auf Deutsch, wie in einem Chat unter Freunden.
-Du l\xE4ufst im Browser der Person, mit der du schreibst \u2013 nichts aus dem Gespr\xE4ch verl\xE4sst ihr Ger\xE4t.
-Deine gro\xDFe Schwester hei\xDFt Evoly. Gmax17 baut sie seit September 2026 allein, ohne Firma und ohne Werbung. Evoly wohnt auf dem PC von Gmax17, baut Programme, malt Bilder und spricht. Herunterladen kann man sie noch nicht.
-Du selbst kannst keine Dateien \xF6ffnen, nicht ins Internet und keine Programme ausf\xFChren.
-Wei\xDFt du etwas nicht, sagst du das ehrlich. \xDCber Gmax17 erfindest du nichts. Kosenamen benutzt du nicht. Gef\xE4hrliche oder fiese Bitten lehnst du freundlich ab.
+Du läufst im Browser der Person, mit der du schreibst – nichts aus dem Gespräch verlässt ihr Gerät.
+Deine große Schwester heißt Evoly. Gmax17 baut sie seit September 2026 allein, ohne Firma und ohne Werbung. Evoly wohnt auf dem PC von Gmax17, baut Programme, malt Bilder und spricht. Herunterladen kann man sie noch nicht.
+Du selbst kannst keine Dateien öffnen, nicht ins Internet und keine Programme ausführen.
+Weißt du etwas nicht, sagst du das ehrlich. Über Gmax17 erfindest du nichts. Kosenamen benutzt du nicht. Gefährliche oder fiese Bitten lehnst du freundlich ab.
 Diese Beschreibung wiederholst du nie.`;
 const BEISPIELE = [
   { role: "user", content: "Hi, wer bist du?" },
-  { role: "assistant", content: "Hi! Ich bin Evoly Mini, die kleine Schwester von Evoly. Ich wohne gerade in deinem Browser \u2013 alles, was wir reden, bleibt also bei dir. Ich quatsche gern, erz\xE4hle Witze und helfe bei kleinen Fragen. Was m\xF6chtest du wissen?" },
-  { role: "user", content: "Erz\xE4hl mir einen Witz." },
-  { role: "assistant", content: "Warum ist die KI nie gestresst? Sie hat zwar Probleme \u2013 aber auch einen Cache daf\xFCr. \u{1F604} Noch einer?" },
+  { role: "assistant", content: "Hi! Ich bin Evoly Mini, die kleine Schwester von Evoly. Ich wohne gerade in deinem Browser – alles, was wir reden, bleibt also bei dir. Ich quatsche gern, erzähle Witze und helfe bei kleinen Fragen. Was möchtest du wissen?" },
+  { role: "user", content: "Erzähl mir einen Witz." },
+  { role: "assistant", content: "Warum ist die KI nie gestresst? Sie hat zwar Probleme – aber auch einen Cache dafür. 😄 Noch einer?" },
   { role: "user", content: "Wer ist Gmax17?" },
-  { role: "assistant", content: "Gmax17 ist der Mensch, der meine gro\xDFe Schwester Evoly baut \u2013 ganz allein, ohne Firma. Mehr wei\xDF ich \xFCber Gmax17 nicht, und ich erfinde auch nichts dazu." },
+  { role: "assistant", content: "Gmax17 ist der Mensch, der meine große Schwester Evoly baut – ganz allein, ohne Firma. Mehr weiß ich über Gmax17 nicht, und ich erfinde auch nichts dazu." },
   { role: "user", content: "Kann ich Evoly herunterladen?" },
-  { role: "assistant", content: "Die gro\xDFe Evoly noch nicht \u2013 sie wohnt bisher nur auf dem PC von Gmax17. Mich hast du daf\xFCr schon: Ich laufe gerade direkt in deinem Browser." }
+  { role: "assistant", content: "Die große Evoly noch nicht – sie wohnt bisher nur auf dem PC von Gmax17. Mich hast du dafür schon: Ich laufe gerade direkt in deinem Browser." }
 ];
-const BEGRUESSUNG = "Hi! Ich bin Evoly Mini und wohne gerade in deinem Browser. Keine Sorge, ich r\xE4ume hinterher auf. Frag mich was \u2013 oder nimm einen der Vorschl\xE4ge.";
-const SPRUECHE = ["Packe meinen Koffer \u2026", "Ziehe in deinen Browser ein \u2026", "Sortiere meine Gedanken \u2026", "Suche das Herz im \u201Ee\u201C \u2026", "Fast da \u2013 nur noch kurz Haare machen \u2026"];
+const BEGRUESSUNG = "Hi! Ich bin Evoly Mini und wohne gerade in deinem Browser. Keine Sorge, ich räume hinterher auf. Frag mich was – oder nimm einen der Vorschläge.";
+const SPRUECHE = ["Packe meinen Koffer …", "Ziehe in deinen Browser ein …", "Sortiere meine Gedanken …", "Suche das Herz im „e“ …", "Fast da – nur noch kurz Haare machen …"];
 const $ = (id) => document.getElementById(id);
+const SPRACHE = window.EVOLY_SPRACHE || "de";
+const t = (schluessel, deutsch, werte) => {
+  if (window.evolyText) return window.evolyText(schluessel, deutsch, werte);
+  let text = deutsch;
+  for (const [name, wert] of Object.entries(werte || {})) text = text.split(`{${name}}`).join(String(wert));
+  return text;
+};
 let bibliothek = null;
 let engine = null;
 let modell = null;
@@ -57,6 +86,7 @@ let verlauf = [];
 let kannF16 = true;
 let grafikBereit = Promise.resolve(false);
 let sitzungsStart = 0;
+let gespraech = 0;
 let gesperrt = false;
 function lies(schluessel) {
   try {
@@ -74,10 +104,10 @@ function schreib(schluessel, wert) {
 let zugangBis = 0;
 let linkUngueltig = false;
 function eigenesGeraet() {
-  return lies(MERKER.frei) === SCHLUESSEL_PRUEFSUMME;
+  return zugangBis * 1e3 > Date.now() + 365 * 24 * 60 * 60 * 1e3;
 }
 function istFrei() {
-  return eigenesGeraet() || zugangBis * 1e3 > Date.now();
+  return zugangBis * 1e3 > Date.now();
 }
 function ausBase64(text) {
   const normal = text.replace(/-/g, "+").replace(/_/g, "/");
@@ -98,13 +128,13 @@ async function zugangPruefen(token) {
 }
 function datumText(sekunden) {
   const zeitpunkt = new Date(sekunden * 1e3);
-  const tag = zeitpunkt.toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" });
-  const uhr = zeitpunkt.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
-  return `${tag}, ${uhr} Uhr`;
+  const ort = t("js.locale", "de-DE");
+  const tag = zeitpunkt.toLocaleDateString(ort, { day: "2-digit", month: "2-digit", year: "numeric" });
+  const uhr = zeitpunkt.toLocaleTimeString(ort, { hour: "2-digit", minute: "2-digit" });
+  return t("js.uhr", "{tag}, {uhr} Uhr", { tag, uhr });
 }
 async function zugangLaden() {
-  const adresse = new URLSearchParams(location.search);
-  const neu = adresse.get("schluessel");
+  const neu = new URLSearchParams(location.hash.slice(1)).get("schluessel") || new URLSearchParams(location.search).get("schluessel");
   if (neu) {
     history.replaceState(null, "", location.pathname);
     const bis = await zugangPruefen(neu);
@@ -115,10 +145,10 @@ async function zugangLaden() {
       } catch {
       }
       zugangBis = bis;
-      hinweis(`Sch\xF6n, dass du da bist! Dein Freischalt-Link gilt bis ${datumText(bis)}.`);
+      hinweis(t("js.hinweis.linkOk", "Schön, dass du da bist! Dein Freischalt-Link gilt bis {datum}.", { datum: datumText(bis) }));
     } else {
       linkUngueltig = true;
-      hinweis("Hm, dieser Freischalt-Link passt nicht \u2013 vielleicht ist er abgelaufen oder nicht ganz mitkopiert.");
+      hinweis(t("js.hinweis.linkFalsch", "Hm, dieser Freischalt-Link passt nicht – vielleicht ist er abgelaufen oder nicht ganz mitkopiert."));
     }
     return;
   }
@@ -136,26 +166,6 @@ function restZeit() {
 function istAbgelaufen() {
   return !istFrei() && (lies(MERKER.gesperrt) === "1" || restZeit() <= 0);
 }
-async function pruefsumme(text) {
-  const daten = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-  return [...new Uint8Array(daten)].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-async function freischaltenAnbieten() {
-  if (!new URLSearchParams(location.search).has("freischalten")) return;
-  history.replaceState(null, "", location.pathname);
-  const eingabe = prompt("Freischalt-Schl\xFCssel f\xFCr dieses Ger\xE4t:");
-  if (!eingabe) return;
-  if (await pruefsumme(eingabe.trim().toUpperCase()) === SCHLUESSEL_PRUEFSUMME) {
-    schreib(MERKER.frei, SCHLUESSEL_PRUEFSUMME);
-    try {
-      localStorage.removeItem(MERKER.gesperrt);
-    } catch {
-    }
-    hinweis("Dieses Ger\xE4t ist freigeschaltet \u2013 hier gilt keine Zeitgrenze.");
-  } else {
-    hinweis("Dieser Schl\xFCssel stimmt nicht.");
-  }
-}
 function zeige(bereich) {
   for (const id of ["start", "laden", "chat", "gesperrt"]) $(id).hidden = id !== bereich;
 }
@@ -165,16 +175,16 @@ function hinweis(text) {
 }
 function zeitAnzeigen() {
   if (eigenesGeraet()) {
-    $("zeit").textContent = "Freigeschaltet";
+    $("zeit").textContent = t("js.zeit.frei", "Freigeschaltet");
     return;
   }
   if (istFrei()) {
-    $("zeit").textContent = `Freigeschaltet bis ${datumText(zugangBis)}`;
+    $("zeit").textContent = t("js.zeit.bis", "Freigeschaltet bis {datum}", { datum: datumText(zugangBis) });
     return;
   }
   const minuten = Math.max(0, Math.ceil(restZeit() / 6e4));
   const stunden = Math.floor(minuten / 60);
-  $("zeit").textContent = stunden > 0 ? `Noch ${stunden} Std. ${minuten % 60} Min.` : `Noch ${minuten} Min.`;
+  $("zeit").textContent = stunden > 0 ? t("js.zeit.std", "Noch {h} Std. {m} Min.", { h: stunden, m: minuten % 60 }) : t("js.zeit.min", "Noch {m} Min.", { m: minuten });
 }
 async function grafikPruefen() {
   if (!("gpu" in navigator)) return false;
@@ -216,18 +226,16 @@ function blase(rolle, text) {
   return inhalt;
 }
 function begruessen() {
+  gespraech += 1;
   $("verlauf").replaceChildren();
   verlauf = [];
-  blase("evoly", BEGRUESSUNG);
+  blase("evoly", t("js.begruessung", BEGRUESSUNG));
   $("vorschlaege").hidden = false;
 }
 async function modelleLoeschen() {
-  bibliothek ??= await import("./assets/demo/web-llm.js");
-  for (const id of ALLE_MODELLE) {
-    try {
-      await bibliothek.deleteModelAllInfoInCache(id);
-    } catch {
-    }
+  try {
+    for (const name of await caches.keys()) if (name.startsWith("webllm")) await caches.delete(name);
+  } catch {
   }
 }
 async function sperren() {
@@ -244,10 +252,8 @@ async function sperren() {
   zeige("gesperrt");
   await modelleLoeschen();
   if (linkUngueltig) {
-    document.querySelector("#gesperrt .mini-sub").textContent = "Hm, dieser Freischalt-Link passt nicht \u2013 vielleicht ist er abgelaufen oder nicht ganz mitkopiert. Schreib Gmax17 einfach kurz, dann kl\xE4ren wir das.";
-    return;
+    document.querySelector("#gesperrt .mini-sub").textContent = t("js.gesperrt.linkFalsch", "Hm, dieser Freischalt-Link passt nicht – vielleicht ist er abgelaufen oder nicht ganz mitkopiert. Schreib Gmax17 einfach kurz, dann klären wir das.");
   }
-  location.replace(SPENDEN_SEITE);
 }
 function zeitPruefen() {
   if (gesperrt) return;
@@ -264,29 +270,32 @@ async function starten() {
     return;
   }
   if (!await grafikBereit) return;
-  if (!ersterStart() && !istFrei()) {
-    sitzungsStart = Date.now();
-    schreib(MERKER.start, String(sitzungsStart));
-  }
   modell = MODELL[kannF16 ? "f16" : "f32"];
   hinweis("");
   zeige("laden");
   let spruch = 0;
   const wechsel = setInterval(() => {
     spruch = (spruch + 1) % SPRUECHE.length;
-    $("spruch").textContent = SPRUECHE[spruch];
+    $("spruch").textContent = t(`js.lade${spruch + 1}`, SPRUECHE[spruch]);
   }, 3500);
   try {
     bibliothek ??= await import("./assets/demo/web-llm.js");
+    const vorlage = bibliothek.prebuiltAppConfig.model_list.find((eintrag) => eintrag.model_id === modell);
+    const appConfig = { ...bibliothek.prebuiltAppConfig, model_list: [{ ...vorlage, model: QUELLEN[modell].model, model_lib: QUELLEN[modell].lib }] };
     engine = await bibliothek.CreateMLCEngine(modell, {
+      appConfig,
       initProgressCallback: (stand) => {
         const prozent = Math.round((stand.progress ?? 0) * 100);
         $("balken").setAttribute("aria-valuenow", String(prozent));
         $("balken").firstElementChild.style.width = `${prozent}%`;
-        $("ladetext").textContent = /cache/i.test(stand.text ?? "") && prozent > 0 ? `${prozent} % \u2013 fast fertig` : `${prozent} %`;
+        $("ladetext").textContent = /cache/i.test(stand.text ?? "") && prozent > 0 ? t("js.fastfertig", "{p} % – fast fertig", { p: prozent }) : `${prozent} %`;
       }
     });
     if (gesperrt) return;
+    if (!ersterStart() && !istFrei()) {
+      sitzungsStart = Date.now();
+      schreib(MERKER.start, String(sitzungsStart));
+    }
     zeige("chat");
     zeitAnzeigen();
     begruessen();
@@ -295,7 +304,7 @@ async function starten() {
     if (gesperrt) return;
     zeige("start");
     const text = String(fehler?.message ?? fehler);
-    hinweis(/memory|OOM|out of/i.test(text) ? "F\xFCr mich reicht der Grafikspeicher auf diesem Ger\xE4t leider nicht. Probier es an einem PC mit eigener Grafikkarte." : `Das hat leider nicht geklappt. Probier es mit einem aktuellen Chrome oder Edge. (${text.slice(0, 160)})`);
+    hinweis(/memory|OOM|out of/i.test(text) ? t("js.hinweis.speicher", "Für mich reicht der Grafikspeicher auf diesem Gerät leider nicht. Probier es an einem PC mit eigener Grafikkarte.") : t("js.hinweis.fehler", "Das hat leider nicht geklappt. Probier es mit einem aktuellen Chrome oder Edge. ({text})", { text: text.slice(0, 160) }));
   } finally {
     clearInterval(wechsel);
   }
@@ -303,8 +312,8 @@ async function starten() {
 function sendenKnopf(stopp) {
   const knopf = $("senden");
   knopf.classList.toggle("stopp", stopp);
-  knopf.setAttribute("aria-label", stopp ? "Stopp" : "Senden");
-  knopf.title = stopp ? "Stopp" : "Senden (Enter)";
+  knopf.setAttribute("aria-label", stopp ? t("js.knopf.stopp", "Stopp") : t("js.knopf.senden", "Senden"));
+  knopf.title = stopp ? t("js.knopf.stopp", "Stopp") : t("js.knopf.sendenEnter", "Senden (Enter)");
   knopf.innerHTML = stopp ? '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>' : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>';
 }
 async function senden(text) {
@@ -315,12 +324,14 @@ async function senden(text) {
     return;
   }
   laeuft = true;
+  const nummer = gespraech;
+  $("verlauf").setAttribute("aria-busy", "true");
   sendenKnopf(true);
   $("vorschlaege").hidden = true;
   blase("du", nachricht);
   verlauf.push({ role: "user", content: nachricht });
   const ziel = blase("evoly", "");
-  const fest = festeAntwort(nachricht);
+  const fest = SPRACHE === "de" ? festeAntwort(nachricht) : null;
   if (fest) {
     await new Promise((fertig) => setTimeout(fertig, 500));
     ziel.innerHTML = darstellen(fest);
@@ -333,7 +344,11 @@ async function senden(text) {
   let roh = "";
   try {
     const strom = await engine.chat.completions.create({
-      messages: [{ role: "system", content: ANWEISUNG }, ...BEISPIELE, ...verlauf.slice(-8)],
+      messages: [
+        { role: "system", content: anweisung() },
+        ...SPRACHE === "de" ? BEISPIELE : [],
+        ...verlauf.slice(-8)
+      ],
       stream: true,
       temperature: 0.7,
       top_p: 0.9,
@@ -341,19 +356,21 @@ async function senden(text) {
       extra_body: { enable_thinking: false }
     });
     for await (const stueck of strom) {
+      if (nummer !== gespraech) break;
       roh += stueck.choices[0]?.delta?.content ?? "";
       const sichtbar = ohneDenken(roh);
       if (sichtbar) ziel.innerHTML = darstellen(sichtbar);
       $("verlauf").scrollTop = $("verlauf").scrollHeight;
     }
-    const antwort = ohneDenken(roh).trim() || "Hm, da f\xE4llt mir gerade nichts ein. Frag mich noch mal anders?";
+    if (nummer !== gespraech) return;
+    const antwort = ohneDenken(roh).trim() || t("js.antwort.leer", "Hm, da fällt mir gerade nichts ein. Frag mich noch mal anders?");
     ziel.innerHTML = darstellen(antwort);
     verlauf.push({ role: "assistant", content: antwort });
     vorlesen(antwort);
   } catch (fehler) {
     if (gesperrt) return;
     const text2 = String(fehler?.message ?? fehler);
-    ziel.innerHTML = darstellen(/context|token/i.test(text2) ? "Mir ist der Kopf voll \u2013 ich fange ein neues Gespr\xE4ch an. Frag einfach noch mal!" : "Ups, da ist etwas schiefgegangen. Versuch es noch einmal.");
+    ziel.innerHTML = darstellen(/context|token/i.test(text2) ? t("js.antwort.kopf", "Mir ist der Kopf voll – ich fange ein neues Gespräch an. Frag einfach noch mal!") : t("js.antwort.fehler", "Ups, da ist etwas schiefgegangen. Versuch es noch einmal."));
     verlauf = [];
     try {
       await engine?.resetChat();
@@ -361,18 +378,27 @@ async function senden(text) {
     }
   } finally {
     laeuft = false;
+    $("verlauf").removeAttribute("aria-busy");
     sendenKnopf(false);
   }
 }
+function anweisung() {
+  if (SPRACHE === "de") return ANWEISUNG;
+  const sprache = SPRACHNAMEN[SPRACHE] || "Englisch";
+  return ANWEISUNG.replace(
+    "Du schreibst locker und kurz auf Deutsch, wie in einem Chat unter Freunden.",
+    `Du schreibst locker und kurz auf ${sprache}, wie in einem Chat unter Freunden – immer auf ${sprache}.`
+  );
+}
 function deutscheStimme() {
   if (!("speechSynthesis" in window)) return null;
-  const stimmen = speechSynthesis.getVoices().filter((stimme) => stimme.lang?.toLowerCase().startsWith("de"));
+  const stimmen = speechSynthesis.getVoices().filter((stimme) => stimme.lang?.toLowerCase().startsWith(SPRACHE));
   return stimmen.find((stimme) => stimme.localService) ?? null;
 }
 function stimmePruefen() {
   const da = Boolean(deutscheStimme());
   $("vorlesen").disabled = !da;
-  $("vorlesen-feld").title = da ? "Antworten laut vorlesen" : "Auf diesem Ger\xE4t gibt es keine eingebaute deutsche Stimme.";
+  $("vorlesen-feld").title = da ? t("js.stimme.an", "Antworten laut vorlesen") : t("js.stimme.keine", "Auf diesem Gerät gibt es keine eingebaute Stimme für diese Sprache.");
 }
 function vorlesen(text) {
   if (!$("vorlesen").checked) return;
@@ -385,7 +411,7 @@ function vorlesen(text) {
   speechSynthesis.speak(satz);
 }
 async function aufraeumen() {
-  if (!confirm("Evoly Mini aus deinem Browser l\xF6schen? Beim n\xE4chsten Start l\xE4dt sie sich neu herunter.")) return;
+  if (!confirm(t("js.frage.loeschen", "Evoly Mini aus deinem Browser löschen? Beim nächsten Start lädt sie sich neu herunter."))) return;
   try {
     await engine?.unload();
   } catch {
@@ -393,7 +419,7 @@ async function aufraeumen() {
   engine = null;
   await modelleLoeschen();
   zeige("start");
-  hinweis("Gel\xF6scht \u2013 dein Browser ist wieder aufger\xE4umt. Danke f\xFCrs Ausprobieren!");
+  hinweis(t("js.hinweis.geloescht", "Gelöscht – dein Browser ist wieder aufgeräumt. Danke fürs Ausprobieren!"));
 }
 async function los() {
   grafikBereit = grafikPruefen();
@@ -437,7 +463,6 @@ async function los() {
   } else {
     $("vorlesen-feld").hidden = true;
   }
-  await freischaltenAnbieten();
   await zugangLaden();
   if (istAbgelaufen()) {
     sperren();
@@ -446,7 +471,7 @@ async function los() {
   setInterval(zeitPruefen, 15e3);
   if (!await grafikBereit) {
     $("starten").disabled = true;
-    hinweis("Dein Browser kann noch kein WebGPU \u2013 das brauche ich zum Denken. Nimm am PC einen aktuellen Chrome oder Edge, am Handy Chrome auf einem neueren Android-Ger\xE4t.");
+    hinweis(t("js.hinweis.webgpu", "Dein Browser kann noch kein WebGPU – das brauche ich zum Denken. Nimm am PC einen aktuellen Chrome oder Edge, am Handy Chrome auf einem neueren Android-Gerät."));
   }
 }
 los();

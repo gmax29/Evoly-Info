@@ -5,36 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-e2g5HkZP+fghbsY1m7moq4GopOo7zRRaAHNyQ2Q7oSI=' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co https://raw.githubusercontent.com; worker-src 'self' blob:; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="no-referrer">
-  <title>Evoly Mini – probier mich aus</title>
-  <meta name="description" content="Evoly Mini, die kleine Schwester von Evoly: eine KI, die komplett in deinem Browser läuft – ohne Anmeldung, ohne Server, ohne Mitlesen.">
+  <title data-i18n="d.1">Evoly Mini – probier mich aus</title>
+  <meta data-i18n-attr="content:d.m2" name="description" content="Evoly Mini, die kleine Schwester von Evoly: eine KI, die komplett in deinem Browser läuft – ohne Anmeldung, ohne Server, ohne Mitlesen.">
   <meta name="author" content="Gmax17">
   <meta name="tdm-reservation" content="1">
-  <meta property="og:title" content="Evoly Mini – probier mich aus">
-  <meta property="og:description" content="Eine kleine KI mit Herz, die komplett in deinem Browser läuft. Einfach starten und losquatschen.">
-  <meta property="og:image" content="https://gmax29.github.io/Evoly-Info/assets/bilder/evoly-gross.webp">
+  <meta data-i18n-attr="content:d.m3" property="og:title" content="Evoly Mini – probier mich aus">
+  <meta data-i18n-attr="content:d.m4" property="og:description" content="Eine kleine KI mit Herz, die komplett in deinem Browser läuft. Einfach starten und losquatschen.">
+  <meta property="og:image" content="assets/bilder/evoly-gross.webp">
   <meta name="theme-color" content="#0d0b1f">
   <link rel="icon" type="image/png" href="assets/evoly.png">
   <link rel="preload" href="assets/schriften/fraunces.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
   <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <script src="sprache.js"></script>
 </head>
 <body>
-  <a class="skip" href="#inhalt">Zum Inhalt</a>
+  <a data-i18n="d.5" class="skip" href="#inhalt">Zum Inhalt</a>
   <div class="glow" aria-hidden="true"></div>
 
   <header class="nav">
-    <a class="nav-logo" href="index.html"><img src="assets/evoly.png" alt="" width="28" height="28"> Evoly</a>
-    <nav class="nav-links" aria-label="Seiten">
-      <a href="index.html" class="nav-mini">Zurück zu Evoly</a>
-      <a href="index.html#unterstuetzen" class="nav-herz">Unterstützen</a>
+    <a class="nav-logo" href="index.html"><img src="assets/evoly.png" alt="" width="28" height="28"> <span class="nav-logo-text">Evoly</span></a>
+    <nav data-i18n-attr="aria-label:d.a7" class="nav-links" aria-label="Seiten">
+      <a data-i18n="d.8" href="index.html" class="nav-mini">Zurück zu Evoly</a>
+      <a data-i18n="d.9" href="index.html#unterstuetzen" class="nav-herz">Unterstützen</a>
     </nav>
   </header>
 
   <main id="inhalt" class="mini-seite">
     <section class="mini-kopf">
-      <p class="hero-hallo">Hi, ich bin die Kleine!</p>
+      <p data-i18n="d.10" class="hero-hallo">Hi, ich bin die Kleine!</p>
       <h1 class="mini-titel">Evoly Mini</h1>
-      <p class="mini-sub">
+      <p data-i18n="d.12" class="mini-sub">
         Ich bin eine KI, die kleine Schwester von Evoly. Ich laufe komplett in deinem Browser – auf deinem Gerät, ohne Server. Was du mir schreibst,
         verlässt deinen Rechner nicht. Nicht mal Gmax17 liest mit.
       </p>
@@ -42,65 +43,66 @@
 
     <section class="mini" aria-label="Evoly Mini">
       <div class="mini-start" id="start">
-        <h2 class="mini-frage">Bereit für ein Schwätzchen?</h2>
-        <p class="mini-sub mini-start-text">
+        <h2 data-i18n="d.14" class="mini-frage">Bereit für ein Schwätzchen?</h2>
+        <p data-i18n="d.15" class="mini-sub mini-start-text">
           Ich bin etwa 1,1 GB groß. Beim ersten Start lädt dein Browser mich einmal herunter, danach bin ich in Sekunden da – sogar offline.
           Am besten klappt es an einem PC mit aktuellem Chrome oder Edge.
         </p>
-        <button class="hero-cta mini-starten" id="starten" type="button">Evoly Mini starten</button>
+        <button data-i18n="d.16" class="hero-cta mini-starten" id="starten" type="button">Evoly Mini starten</button>
         <p class="mini-hinweis" id="hinweis" role="status" hidden></p>
-        <p class="klein">
-          Du kannst mich 24 Stunden kostenlos testen. Danach ist die Testzeit auf diesem Gerät vorbei, und ich lösche mich selbst wieder. Mehr Zeit? Frag Gmax17 nach einem persönlichen Freischalt-Link. Die Dateien kommen von Hugging Face und GitHub;
-          mehr dazu unter <a href="rechtliches.html#demo">Datenschutz</a>.
+        <p data-i18n="d.17" class="klein">
+          Du kannst mich 24 Stunden kostenlos testen. Danach ist die Testzeit auf diesem Gerät vorbei, und ich lösche mich selbst wieder. Mehr Zeit? Frag Gmax17 nach einem persönlichen Freischalt-Link. Mit dem Klick auf „Evoly Mini starten“ willigst du ein, dass dein Browser
+          die Dateien von Hugging Face (USA) und GitHub lädt und sich Startzeit und Testzeit merkt – mehr dazu unter <a href="rechtliches.html#demo">Datenschutz</a>.
         </p>
       </div>
 
       <div class="mini-laden" id="laden" hidden>
         <img class="mini-laden-logo" src="assets/evoly.png" alt="" width="64" height="64">
-        <p class="mini-laden-spruch" id="spruch" aria-live="polite">Packe meinen Koffer …</p>
-        <div class="mini-balken" id="balken" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
-        <p class="klein" id="ladetext">Starte …</p>
+        <p data-i18n="d.18" class="mini-laden-spruch" id="spruch" aria-live="polite">Packe meinen Koffer …</p>
+        <div data-i18n-attr="aria-label:d.a19" class="mini-balken" id="balken" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+        <p data-i18n="d.20" class="klein" id="ladetext">Starte …</p>
       </div>
 
       <div class="mini-chat" id="chat" hidden>
         <div class="mini-verlauf" id="verlauf" aria-live="polite"></div>
         <div class="mini-vorschlaege" id="vorschlaege">
-          <button type="button">Erzähl mir einen Witz</button>
-          <button type="button">Was kann die große Evoly?</button>
-          <button type="button">Schreib mir ein kurzes Gedicht über Kaffee</button>
-          <button type="button">Wer ist Gmax17?</button>
+          <button data-i18n="d.21" type="button">Erzähl mir einen Witz</button>
+          <button data-i18n="d.22" type="button">Was kann die große Evoly?</button>
+          <button data-i18n="d.23" type="button">Schreib mir ein kurzes Gedicht über Kaffee</button>
+          <button data-i18n="d.24" type="button">Wer ist Gmax17?</button>
         </div>
         <form class="mini-eingabe" id="eingabe">
-          <textarea id="text" rows="1" placeholder="Schreib Evoly Mini …" aria-label="Nachricht an Evoly Mini"></textarea>
-          <button type="submit" class="mini-senden" id="senden" aria-label="Senden" title="Senden (Enter)">
+          <textarea data-i18n-attr="placeholder:d.a25|aria-label:d.a26" id="text" rows="1" placeholder="Schreib Evoly Mini …" aria-label="Nachricht an Evoly Mini"></textarea>
+          <button data-i18n-attr="aria-label:d.a27|title:d.a28" type="submit" class="mini-senden" id="senden" aria-label="Senden" title="Senden (Enter)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
           </button>
         </form>
         <div class="mini-leiste">
-          <label class="mini-schalter" id="vorlesen-feld"><input type="checkbox" id="vorlesen"> Vorlesen</label>
+          <label class="mini-schalter" id="vorlesen-feld"><input type="checkbox" id="vorlesen"> <span data-i18n="d.29">Vorlesen</span></label>
           <span class="mini-zeit" id="zeit"></span>
-          <button type="button" id="neu">Neues Gespräch</button>
-          <button type="button" id="aufraeumen">Speicher freigeben</button>
+          <button data-i18n="d.30" type="button" id="neu">Neues Gespräch</button>
+          <button data-i18n="d.31" type="button" id="aufraeumen">Speicher freigeben</button>
         </div>
       </div>
 
       <div class="mini-start" id="gesperrt" hidden>
         <img class="mini-laden-logo" src="assets/evoly.png" alt="" width="64" height="64">
-        <h2 class="mini-frage">Deine kostenlose Testzeit ist vorbei</h2>
-        <p class="mini-sub">
+        <h2 data-i18n="d.32" class="mini-frage">Deine kostenlose Testzeit ist vorbei</h2>
+        <p data-i18n="d.33" class="mini-sub">
           Danke fürs Ausprobieren! Ich habe mich wieder aus deinem Browser gelöscht und bleibe auf diesem Gerät jetzt aus.
-          Mehr Zeit mit mir gibt es bald mit einem Abo – bis dahin freut sich meine große Schwester über ein bisschen Unterstützung.
+          Wenn ich dir gefallen habe, freut sich meine große Schwester über ein bisschen Unterstützung – ganz freiwillig.
+          Alles, was bei Gmax17 ankommt, fließt vollständig in die Hardware, auf der Evoly lebt, und in ihren Ausbau.
         </p>
-        <a class="hero-cta mini-starten" href="index.html#unterstuetzen">Evoly unterstützen</a>
+        <a data-i18n="d.34" class="hero-cta mini-starten" href="index.html#unterstuetzen">Evoly unterstützen</a>
       </div>
     </section>
 
-    <p class="mini-fussnote">Evoly Mini ist eine KI: Ihre Antworten entstehen automatisch auf deinem Gerät und werden von niemandem geprüft. Sie ist klein und irrt sich öfter als ihre große Schwester – bei Wichtigem bitte nicht auf sie verlassen.</p>
+    <p data-i18n="d.35" class="mini-fussnote">Evoly Mini ist eine KI: Ihre Antworten entstehen automatisch auf deinem Gerät und werden von niemandem geprüft. Sie ist klein und irrt sich öfter als ihre große Schwester – bei Wichtigem bitte nicht auf sie verlassen. Nicht für Kinder gedacht.</p>
   </main>
 
   <footer class="footer">
-    <p>© 2026 Gmax17 · <a href="index.html">Evoly – ein Herzensprojekt</a></p>
-    <p class="footer-links"><a href="rechtliches.html#impressum">Impressum</a> <a href="rechtliches.html#datenschutz">Datenschutz</a> <a href="rechtliches.html#lizenzen">Urheberrecht und Lizenz</a></p>
+    <p data-i18n="d.36">© 2026 Gmax17 · <a href="index.html">Evoly – ein Herzensprojekt</a></p>
+    <p class="footer-links"><a data-i18n="d.tech1" href="technik.html">So arbeite ich</a> <a data-i18n="d.37" href="rechtliches.html#impressum">Impressum</a> <a data-i18n="d.38" href="rechtliches.html#datenschutz">Datenschutz</a> <a data-i18n="d.39" href="rechtliches.html#lizenzen">Urheberrecht und Lizenz</a></p>
   </footer>
 
   <script type="module" src="demo.js"></script>

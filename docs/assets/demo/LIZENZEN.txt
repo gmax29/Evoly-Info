@@ -1,15 +1,32 @@
 Evoly Mini – Lizenzen der eingebauten Fremdbestandteile
 =======================================================
 
-assets/demo/web-llm.js enthält, gebündelt und unverändert im Verhalten:
+assets/demo/web-llm.js enthält, gebündelt und verkleinert (sonst unverändert):
 
-- WebLLM 0.2.87 (github.com/mlc-ai/web-llm) – Apache License 2.0, Copyright the MLC-AI contributors;
+- WebLLM 0.2.87 (github.com/mlc-ai/web-llm) – Apache License 2.0, Copyright 2023-2026 WebLLM Team;
   darin enthalten sind Teile von Apache TVM, tokenizers-cpp und XGrammar (jeweils Apache License 2.0).
 - loglevel 1.9.2 (github.com/pimterry/loglevel) – MIT License, Copyright Tim Perry.
 
-Das Sprachmodell wird nicht von dieser Seite verteilt, sondern beim Start von Hugging Face geladen:
-Qwen3.5 (0.8B, 2B oder 4B) vom Qwen-Team, Alibaba Cloud – Apache License 2.0 – in der für den Browser
-umgewandelten Fassung von mlc-ai (huggingface.co/mlc-ai).
+Nicht von dieser Seite verteilt, sondern beim Start direkt von den Anbietern geladen (jeweils fest auf eine Fassung gesetzt):
+- das Sprachmodell Qwen3.5-2B vom Qwen-Team (Alibaba Cloud), Apache License 2.0 – Original: huggingface.co/Qwen/Qwen3.5-2B –
+  in der für den Browser umgewandelten Fassung von mlc-ai (huggingface.co/mlc-ai/Qwen3.5-2B-q4f16_1-MLC bzw. -q4f32_1-MLC);
+- der dazugehörige WebGPU-Programmteil aus github.com/mlc-ai/binary-mlc-llm-libs.
+
+
+=== NOTICE (Apache TVM) ===
+
+Apache TVM
+Copyright 2019-2023 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+
+=== NOTICE (XGrammar) ===
+
+XGrammar
+
+Copyright (c) 2024 by XGrammar Contributors
 
 
 === Apache License 2.0 (WebLLM) ===

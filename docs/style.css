@@ -813,6 +813,50 @@ a:hover {
     gap: 2px;
   }
 }
+.i18n-wartet body {
+  visibility: hidden;
+}
+.sprachwahl {
+  flex-shrink: 0;
+  padding: 7px 30px 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(22, 19, 47, 0.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b8a6ff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 10px center / 14px no-repeat;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+  appearance: none;
+}
+.sprachwahl:hover {
+  border-color: var(--lilac);
+}
+.sprachwahl option {
+  background: var(--night-2);
+  color: var(--text);
+}
+@media (max-width: 640px) {
+  .nav {
+    gap: 10px;
+  }
+  .nav-links .nav-herz {
+    padding: 6px 12px;
+  }
+}
+@media (max-width: 440px) {
+  .nav-logo-text {
+    display: none;
+  }
+}
+.recht-uebersetzung {
+  max-width: 760px;
+  margin: 24px auto 0;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 174, 211, 0.35);
+  background: rgba(255, 174, 211, 0.08);
+  color: var(--pearl);
+}
 .nav-links .nav-mini {
   color: var(--lilac);
   border: 1px solid rgba(184, 166, 255, 0.4);
@@ -1172,8 +1216,11 @@ a:hover {
   margin-bottom: 22px;
 }
 @media (max-width: 640px) {
-  .nav-links a.nav-mini {
-    display: inline-block;
+  .sprachwahl {
+    padding: 6px 26px 6px 10px;
+    font-size: 0.85rem;
+    max-width: 120px;
+    background-position: right 8px center;
   }
   .mini-teaser {
     grid-template-columns: 1fr;
@@ -1208,5 +1255,81 @@ a:hover {
   }
   .mini-leiste {
     padding: 0 12px 14px;
+  }
+}
+.technik .sec + .sec {
+  padding-top: 8px;
+}
+.technik .sec-title {
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+}
+.technik h1.sec-title {
+  font-size: clamp(2rem, 4.4vw, 3rem);
+}
+.technik .steckbrief-liste {
+  margin: 14px 0 16px;
+}
+.technik .steckbrief-liste a {
+  color: var(--lilac);
+}
+.tempo {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  margin: 16px 0 12px;
+  padding: 0;
+}
+.tempo li {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr) 4.5rem;
+  align-items: center;
+  gap: 14px;
+}
+.tempo-name {
+  color: var(--lilac);
+  font-weight: 800;
+}
+.tempo-bahn {
+  display: block;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--glass-strong);
+  overflow: hidden;
+}
+.tempo-bahn span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      90deg,
+      var(--cobalt),
+      var(--lilac) 70%,
+      var(--rose));
+}
+.tempo-chat span {
+  width: 90%;
+}
+.tempo-code span {
+  width: 9%;
+}
+.tempo-sehen span {
+  width: 21%;
+}
+.tempo-wert {
+  color: var(--pearl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .tempo li {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 12px;
+  }
+  .tempo-bahn {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 }
